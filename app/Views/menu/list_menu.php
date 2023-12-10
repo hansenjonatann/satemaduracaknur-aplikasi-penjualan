@@ -23,10 +23,10 @@
         <div class="d-flex justify-content-between my-3">
 
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalTambahMenu">
-  Tambah Menu Baru
-</button>
-          
-          <button class="btn btn-warning btn-md">Cetak laporan</button>
+        Tambah Menu Baru
+        </button>
+
+          <button class="btn btn-success btn-md">Import Data Dari Excel</button>
         </div>
         <table class="table" id="tableMenu">
           <?php if(session()->getFlashdata('berhasil')) : ?>
@@ -53,13 +53,16 @@
             <tr>
               <td><?= $no++ ?></td>
               <td><?= $menu->nama ?></td>
-              <td><?= $menu->harga ?></td>
+              <td>Rp <?= number_format($menu->harga) ?></td>
+              <td>
+                <img src="<?= base_url('menus/'. $menu->gambar)?>" alt="" width="30">
+              </td>
               <td><?= $menu->kategori_id ?></td>
               <td><?= $menu->deskripsi ?></td>
-              <td><?= $menu->stok ?></td>
+              <td><?= $menu->stock ?></td>
               <td>
-                <a href="<?= base_url('menu/editMenu/' . $menu->id_menu)?>" class="btn btn-primary btn-sm"> <i class="fas fa-edit"></i> </a>
-                <a href="<?= base_url('menu/deleteMenu/' . $menu->id_menu)?>" class="btn btn-danger btn-sm"> <i class="fas fa-trash"></i> </a>
+                <a href="<?= base_url('managementMenu/editMenu/' . $menu->id_menu)?>" class="btn btn-primary btn-sm"> <i class="fas fa-edit"></i> </a>
+                <a href="<?= base_url('managementMenu/deleteMenu/' . $menu->id_menu)?>" class="btn btn-danger btn-sm"> <i class="fas fa-trash"></i> </a>
               </td>
             </tr>
 
@@ -79,14 +82,14 @@
     </section>
 
     <div class="modal fade" id="ModalTambahMenu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Form Tambah <?= $title ?></h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="<?=base_url() ?>menu/addMenu" method="post" enctype="multipart/form-data">
+        <form action="<?=base_url() ?>managementMenu/addNewMenu" method="post" enctype="multipart/form-data">
           <div class="mb-3">
             <label for="namaMenu" class="form-label">Nama Menu</label>
             <input type="text" class="form-control" id="namaMenu" name="nama">
@@ -99,7 +102,7 @@
 
            <div class="mb-3">
             <label for="gambarMenu" class="form-label">Gambar Menu</label>
-            <input type="text" class="form-control " id="gambarMenu" name="gambar">
+            <input type="file" class="form-control " id="gambarMenu" name="gambar">
           </div>
 
           
@@ -121,7 +124,10 @@
 
           <div class="mb-3">
             <label for="stok" class="form-label">Stok</label>
-            <input type="number" name="stok" id="deskripsi" class="form-control"></input>
+            <select name="stock" id="stock" class="form-control">
+              <option value="1">Ayam</option>
+              <option value="2">Kambing</option>
+            </select>
           </div>
 
           

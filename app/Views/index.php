@@ -9,6 +9,11 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     />
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+
     <title>Sate Madura Cak Nur - Beranda</title>
   </head>
   <body>
@@ -43,7 +48,7 @@
           class="md:flex gap-2 text-lg font-bold md:space-x-4 md:border-none md:pl-4 border-t pt-4 md:pt-0"
         >
           <li>
-            <a href="<?= base_url() ?>menus">Menu</a>
+            <a href="<?= base_url() ?>menuList">Menu</a>
           </li>
           <li>
             <a href="<?= base_url() ?>ulasan">Ulasan</a>

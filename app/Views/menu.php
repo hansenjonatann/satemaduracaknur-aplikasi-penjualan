@@ -57,18 +57,19 @@
             class="bg-primary border-1 border-black mt-5 rounded-lg shadow-md p-4"
           >
             <img
-              src="<?= base_url()?>images/sateayam.png"
-              alt="Gambar 1"
-              class="w-full object-cover mb-4"
+              src="<?= base_url('menus/'. $menu->gambar)?>"
+              alt="Gambar 1" 
+              class="mb-4" width="100"
             />
             <div class="flex justify-between">
               <div class="flex-col flex">
                 <h2 class="text-xl px-2 font-bold mb-2"><?= $menu->nama ?></h2>
                 <p class="text-lg px-2">Rp <?= number_format($menu->harga) ?></p>
               </div>
-              <button class="flex  px-4  rounded-lg text-white">
+              <a href="<?= base_url('payment/'. $menu->id_menu)?>" class="flex  px-4  rounded-lg text-white">
+
               <i class="fa-solid fa-cart-shopping py-4 text-third text-2xl   hover:text-white transition-all ease-in-out duration-75"></i>
-              </button>
+              </a>
             </div>
           </div>
 

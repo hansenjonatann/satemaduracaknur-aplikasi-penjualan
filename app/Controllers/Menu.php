@@ -14,7 +14,10 @@ class Menu extends BaseController
     }
     public function index()
     {
-        $getMenus = $this->menu->getMenu();
+        // $getMenus = $this->menu->getMenu();
+
+        $getMenus = $data['menu'] = $this->menu->getMenu();
+
 
         $menu = [
             'dataMenu' => $getMenus,
@@ -25,20 +28,23 @@ class Menu extends BaseController
         echo view('layouts/v_wrapper' , $menu);
     }
 
-    public function addMenu()
+    public function addNewMenu()
     {
 
-  
+        $image = $this->request->getFile('gambar');
 
-       
 
+        if($image->isValid() && !$image->hasMoved()){
+            $imageName = $image->getRandomName();
+            $image->move(ROOTPATH . 'public/menus', $imageName);
+        }
         $menu = [
             'nama' => $this->request->getPost('nama'),
             'harga' => $this->request->getPost('harga'),
-            'gambar' => $this->request->getPost('gambar'),
+            'gambar' => $imageName,
             'kategori_id' => $this->request->getPost('kategori'),
             'deskripsi' => $this->request->getPost('deskripsi'),
-            'stok' => $this->request->getPost('stok'),
+            'stock' => $this->request->getPost('stock'),
         ];
 
         $inAddingMenuProccess = $this->menu->storeMenu($menu);
@@ -46,7 +52,7 @@ class Menu extends BaseController
         if($inAddingMenuProccess)
         {
             session()->setFlashdata('berhasil' , 'Menu Berhasil ditambahkan');
-            return redirect()->to('menu');
+            return redirect()->to('managementMenu');
         } else {
             session()->setFlashdata('gagal' , 'Menu Tidak Berhasil ditambahkan');
             return redirect()->back();
@@ -62,12 +68,35 @@ class Menu extends BaseController
         if($inDeleteMenuProgress)
         {
             session()->getFlashdata('berhasil' , 'Menu berhasil dihapus!');
-            return redirect()->to('menu');
+            return redirect()->to('managementMenu');
         }else {
             session()->getFlashdata('gagal' , 'Menu tidak berhasil dihapus!');
             return redirect()->back();
         }
     }
 
+
+    public function searchMenu($keyword)
+    {
+        $searchTerm = $this->request->getGet('search');
+
+        // Lakukan pencarian menggunakan model atau logika pencarian Anda
+        $searchResults = $this->menu->searchByName($searchTerm);
+
+        // Tampilkan hasil pencarian ke view
+        return view('search_results', ['results' => $searchResults, 'searchTerm' => $searchTerm]);   
+    }
+
+    public function getPayment($id)
+    {
+        $getDataMenuById = $this->menu->getMenuById($id);
+
+        $data = [
+            'dataMenu' => $getDataMenuById,
+        
+        ];
+
+        echo view('menu/pembayaran' ,  $data);
+    }
     
 }

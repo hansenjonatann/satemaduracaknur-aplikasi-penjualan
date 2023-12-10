@@ -7,12 +7,16 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 $routes->get('/dashboard' , 'Home::dashboard');
-$routes->get('/menus' , 'Home::menus');
+$routes->get('/menuList' , 'Home::menus');
 $routes->get('/login' , 'Login::index');
-$routes->get('/user' , 'User::index');
+$routes->get('managementMenu', 'Menu::index');
+$routes->post('managementMenu/addNewMenu', 'Menu::addNewMenu');
+$routes->get('managementMenu/deleteMenu/{:segement}' , 'Menu::deleteMenu');
+$routes->get('payment' , 'Payment::index' );
 $routes->setAutoRoute(true);
-$routes->get('menu', 'Menu::index');
+$routes->get('/user' , 'User::index');
 $routes->setAutoRoute(true);
 $routes->get('/penjualan' , 'Penjualan::index');
 $routes->setAutoRoute(true);
+$routes->get('stock' , 'Stock::index');
 

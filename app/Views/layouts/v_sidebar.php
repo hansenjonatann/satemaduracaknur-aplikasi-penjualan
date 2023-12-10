@@ -35,10 +35,19 @@
           
 
           <li class="nav-item">
-            <a href="<?=base_url() ?>menu" class="nav-link">
+            <a href="<?=base_url() ?>managementMenu" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
                 Manajemen Menu
+              </p>
+            </a>
+          </li>
+
+           <li class="nav-item">
+            <a href="<?=base_url() ?>stock" class="nav-link">
+              <i class="nav-icon fas fa-box"></i>
+              <p>
+                Manajemen Stok
               </p>
             </a>
           </li>
